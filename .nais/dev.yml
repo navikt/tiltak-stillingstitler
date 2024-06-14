@@ -3,6 +3,6 @@ ingress:
 env:
   JANZZ_URL: http://pam-janzz.teampam
 external-host:
-  - arbeidsplassen.dev.nav.no
+  - arbeidsplassen.intern.dev.nav.no
 extra-inbound-apps:
   - tiltaksgjennomforing-labs
