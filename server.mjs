@@ -1,6 +1,5 @@
 import express from "express";
 import winston from "winston";
-import asyncHandler from "express-async-handler";
 import { v4 as uuidv4 } from "uuid";
 
 const logger = winston.createLogger({
@@ -38,7 +37,7 @@ async function startApp() {
 
     server.get(
       "/",
-      asyncHandler(async (req, res) => {
+      async (req, res) => {
         const stillingstittel =
           typeof req.query.q === "string" ? req.query.q : "";
         const params = new URLSearchParams({ stillingstittel });
@@ -56,7 +55,7 @@ async function startApp() {
         }
 
         res.json(await response.json());
-      })
+      }
     );
 
     const port = 4000;
