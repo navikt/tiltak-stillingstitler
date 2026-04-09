@@ -1,4 +1,2 @@
 ingress: []
-external-host:
-  - arbeidsplassen.nav.no
 extra-inbound-apps: []

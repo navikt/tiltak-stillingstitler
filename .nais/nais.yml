@@ -36,10 +36,6 @@ spec:
       rules:
         - application: pam-ontologi
           namespace: teampam
-      external:
-        {{#each external-host}}
-          - host: "{{this}}"
-        {{/each}}
     inbound:
       rules:
         - application: tiltaksgjennomforing
