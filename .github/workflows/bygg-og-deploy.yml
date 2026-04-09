@@ -20,8 +20,6 @@ jobs:
         uses: actions/checkout@v6 # ratchet:exclude
         with:
           persist-credentials: false
-      - name: NPM install
-        run: npm ci
       - name: Push docker image to GAR
         uses: nais/docker-build-push@45d352fb62fb52ccb5ff6cba22c047fa02b35321 # ratchet:nais/docker-build-push@v0
         id: docker-build-push

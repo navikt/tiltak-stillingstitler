@@ -1,20 +1,13 @@
 {
   "name": "tiltak-stillingstitler",
   "version": "1.0.0",
-  "scripts": {
-    "start": "node -r dotenv/config server.mjs",
-    "serve": "node server.js"
-  },
+  "packageManager": "pnpm@10.30.2",
   "type": "module",
-  "engines": {
-    "node": ">=14.0.0"
-  },
   "dependencies": {
     "axios": "1.7.7",
-    "dotenv": "16.4.5",
-    "express": "4.21.1",
+    "express": "5.2.1",
     "express-async-handler": "1.2.0",
-    "uuid": "10.0.0",
-    "winston": "3.15.0"
+    "uuid": "13.0.0",
+    "winston": "3.19.0"
   }
 }
