@@ -1,6 +1,4 @@
 ingress:
   - https://tiltak-stillingstitler.intern.dev.nav.no
-external-host:
-  - arbeidsplassen.dev.nav.no
 extra-inbound-apps:
   - tiltaksgjennomforing-labs
