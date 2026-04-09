@@ -1,4 +1,3 @@
-import axios from "axios";
 import express from "express";
 import winston from "winston";
 import asyncHandler from "express-async-handler";
@@ -40,18 +39,23 @@ async function startApp() {
     server.get(
       "/",
       asyncHandler(async (req, res) => {
-        const response = await axios.get(
-          `${config.pamUrl}/rest/typeahead/stilling`,
+        const stillingstittel =
+          typeof req.query.q === "string" ? req.query.q : "";
+        const params = new URLSearchParams({ stillingstittel });
+        const response = await fetch(
+          `${config.pamUrl}/rest/typeahead/stilling?${params.toString()}`,
           {
             headers: {
               "Nav-CallId": uuidv4(),
             },
-            params: {
-              stillingstittel: req.query.q,
-            },
           }
         );
-        res.json(response.data);
+
+        if (!response.ok) {
+          throw new Error(`PAM request failed with status ${response.status}`);
+        }
+
+        res.json(await response.json());
       })
     );
 
