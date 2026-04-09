@@ -2,7 +2,7 @@
   "name": "tiltak-stillingstitler",
   "version": "1.0.0",
   "packageManager": "pnpm@10.30.2",
-  "type": "module",
+  "type": "commonjs",
   "engines": {
     "node": ">=20.6.0"
   },
