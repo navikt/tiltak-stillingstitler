@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "packageManager": "pnpm@10.30.2",
   "type": "module",
+  "engines": {
+    "node": ">=20.6.0"
+  },
   "scripts": {
     "start": "node --env-file=.env server.mjs"
   },
