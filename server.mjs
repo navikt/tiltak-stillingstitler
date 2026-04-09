@@ -8,12 +8,6 @@ const logger = winston.createLogger({
   transports: [new winston.transports.Console()],
 });
 
-const fileLogger = winston.createLogger({
-  level: "info",
-  format: winston.format.json(),
-  transports: [new winston.transports.File({ filename: "full.log" })],
-});
-
 const env = (envKey, required = true) => {
   const envValue = process.env[envKey];
   if (!envValue && required) {
@@ -62,8 +56,15 @@ async function startApp() {
     server.listen(port, () => logger.info(`Listening on port ${port}`));
   } catch (error) {
     logger.error("Error during start-up");
-    fileLogger.error("Error during start-up", error);
   }
 }
+
+const shutdown = () => {
+  process.exitCode = 0;
+  process.exit();
+}
+
+process.on('SIGTERM', shutdown);
+process.on('SIGINT', shutdown);
 
 startApp().catch((err) => logger.error(err));
