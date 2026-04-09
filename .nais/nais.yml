@@ -19,11 +19,10 @@ spec:
     initialDelay: 10
   resources:
     limits:
-      cpu: 200m
-      memory: 256Mi
+      memory: 64Mi
     requests:
-      cpu: 100m
-      memory: 128Mi
+      cpu: 50m
+      memory: 64Mi
   ingresses:
     {{#each ingress}}
     - {{this}}
