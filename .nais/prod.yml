@@ -1,5 +1,4 @@
-ingress:
-  - https://tiltak-stillingstitler.intern.nav.no
+ingress: []
 external-host:
   - arbeidsplassen.nav.no
 extra-inbound-apps: []
