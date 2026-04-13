@@ -23,48 +23,49 @@ const config = {
 
 const server = express();
 
-async function startApp() {
-  try {
-    server.use(["/internal/is_alive", "/internal/is_ready"], (req, res) => {
-      res.send("Ok");
-    });
+try {
+  server.use(["/internal/is_alive", "/internal/is_ready"], (req, res) => {
+    res.send("Ok");
+  });
 
-    server.get(
-      "/",
-      async (req, res) => {
-        const stillingstittel =
-          typeof req.query.q === "string" ? req.query.q : "";
-        const params = new URLSearchParams({ stillingstittel });
-        const response = await fetch(
-          `${config.pamUrl}/rest/typeahead/stilling?${params.toString()}`,
-          {
-            headers: {
-              "Nav-CallId": uuidv4(),
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`PAM request failed with status ${response.status}`);
+  server.get(
+    "/",
+    async (req, res) => {
+      const stillingstittel =
+        typeof req.query.q === "string" ? req.query.q : "";
+      const params = new URLSearchParams({ stillingstittel });
+      const response = await fetch(
+        `${config.pamUrl}/rest/typeahead/stilling?${params.toString()}`,
+        {
+          headers: {
+            "Nav-CallId": uuidv4(),
+          },
         }
+      );
 
-        res.json(await response.json());
+      if (!response.ok) {
+        throw new Error(`PAM request failed with status ${response.status}`);
       }
-    );
 
-    const port = 4000;
-    server.listen(port, () => logger.info(`Listening on port ${port}`));
-  } catch (error) {
-    logger.error("Error during start-up");
-  }
+      res.json(await response.json());
+    }
+  );
+
+  const port = 4000;
+  const listener = server.listen(port, () => logger.info(`Listening on port ${port}`));
+
+  const shutdown = () => {
+    listener.close(() => {
+      logger.info("Server stopped")
+      process.exit(0);
+    });
+  };
+  process.on("SIGTERM", shutdown);
+  process.on("SIGINT", shutdown);
+} catch (error) {
+  logger.error("Error during start-up");
+  process.exit(1);
 }
 
-const shutdown = () => {
-  process.exitCode = 0;
-  process.exit();
-}
 
-process.on('SIGTERM', shutdown);
-process.on('SIGINT', shutdown);
 
-startApp().catch((err) => logger.error(err));
