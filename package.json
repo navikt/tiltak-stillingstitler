@@ -11,10 +11,10 @@
   },
   "dependencies": {
     "express": "5.2.1",
-    "uuid": "13.0.0",
+    "uuid": "14.0.2",
     "winston": "3.19.0"
   },
   "devDependencies": {
-    "esbuild": "0.28"
+    "esbuild": "~0.28.2"
   }
 }
